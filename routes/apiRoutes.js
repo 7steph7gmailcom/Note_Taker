@@ -15,15 +15,14 @@ module.exports = function(app){
     });
 }
 
-
-    // GET Method to return "Notes"
-    app.get("/api/notes", function(req, res){
+// GET Method to return "Notes"
+app.get("/api/notes", function(req, res){
         res.json(notesData);
     });
 
 
-    // POST Method to add "Notes"
-    app.post("/api/notes", function(req, res){
+// POST Method to add "Notes"
+app.post("/api/notes", function(req, res){
 
         if (notesData.length == 0){
             req.body.id = "0";
