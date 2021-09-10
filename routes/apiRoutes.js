@@ -1,5 +1,5 @@
 const fs = require("fs");
-const notesData = require("../db/db.json");
+const notesData = require("../routes/apiRoutes.js");
 
 
 module.exports = function(app){
