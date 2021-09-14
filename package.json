@@ -1,27 +1,14 @@
 {
-  "name": "note_taker",
+  "name": "note-taker",
   "version": "1.0.0",
   "description": "",
-  "main": "node server.js",
-  "dependencies": {
-    "express": "^4.17.1",
-    "requirer": "0.0.4"
-  },
-  "devDependencies": {},
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "build": "npm run build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/7steph7gmailcom/Note_Taker.git"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "url": "https://github.com/7steph7gmailcom/Note_Taker/issues",
-  "homepage": "https://github.com/7steph7gmailcom/Note_Taker#readme",
-  "bugs": {
-    "url": "https://github.com/7steph7gmailcom/Note_Taker/issues"
+  "dependencies": {
+    "express": "^4.16.4"
   }
 }

@@ -2,9 +2,9 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
-const uuid = require("./uuid");
+const uuid = require("./helpers/uuid");
 const util = require("util");
-const noteData = require("./db/db.json");
+// const noteData = require("./db/db.json");
 const readFromFile = util.promisify(fs.readFile);
 
 // Create server application at port 3001 (localhost)
@@ -17,15 +17,28 @@ app.use(express.json());
 app.use(express.static("public"));
 // app.use(routes);
 
+
+// Include js files
+// require("./routes/apiRoutes")(app);
+// require("./routes/htmlRoutes")(app);
+
+// app.use("/api", notesData)
+// app.use("/", notesTaken)
+// // Use public folder
+
+
+
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "/public/index.html"));
 });
   
 app.get("/notes", (req, res) => {
-  res.sendFile(path.join(__dirname, "/public/notes.html"));
+  res.sendFile(path.join(__dirname, "/public/notes.html"))
 });
 
 app.get("/api/notes", (req, res) => {
+  console.log(`${req.method} request received to get notes`);
+
   readFromFile("./db/db.json").then((data) => res.json(JSON.parse(data)));
 });
 
@@ -48,8 +61,10 @@ const append = (content, file) => {
     };
 
 app.post("/api/notes", (req, res) => {
+  console.log(`${req.method} request received to add a notes`);
+
   const { title, text } = req.body;
-  if(title && text) {
+  if (title && text) {
     const newNote = {
       title,
       text,
@@ -66,14 +81,6 @@ app.post("/api/notes", (req, res) => {
  }
 });
 
-// Include js files
-// require("./routes/apiRoutes")(app);
-// require("./routes/htmlRoutes")(app);
-
-// app.use("/api", notesData)
-// app.use("/", notesTaken)
-// // Use public folder
-// app.use(express.static("public"));
 
 // Add listener (localhost 3001)
 app.listen(PORT, () => {
