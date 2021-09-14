@@ -37,8 +37,6 @@ app.get("/notes", (req, res) => {
 });
 
 app.get("/api/notes", (req, res) => {
-  console.log(`${req.method} request received to get notes`);
-
   readFromFile("./db/db.json").then((data) => res.json(JSON.parse(data)));
 });
 
@@ -48,21 +46,19 @@ const writeToFile = (destination, note) => {
       );
     };
 
-const append = (content, file) => {
+const readAndAppend = (content, file) => {
     fs.readFile(file, "utf8", (err, data) => {
       if (err) {
           throw err;
         } else {
           const note = JSON.parse(data);
           note.push(content);
-          writeToFile(file, note);
+          writeToFile(file, parsedData);
         }
       });
     };
 
 app.post("/api/notes", (req, res) => {
-  console.log(`${req.method} request received to add a notes`);
-
   const { title, text } = req.body;
   if (title && text) {
     const newNote = {
@@ -70,8 +66,8 @@ app.post("/api/notes", (req, res) => {
       text,
       id: uuid(),
    };
-   append(newNote, "./db/db.json");
-   const response = {
+    readAndAppend(newNote, "./db/db.json");
+    const response = {
      status: "Note Posted!",
      body: newNote,
    };
