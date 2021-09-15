@@ -35,7 +35,7 @@ const writeToFile = (destination, note) => {
       );
     };
 
-const readAndAppend = (content, file) => {
+const append = (content, file) => {
     fs.readFile(file, "utf8", (err, data) => {
       if (err) {
           throw err;
@@ -48,6 +48,7 @@ const readAndAppend = (content, file) => {
     };
 
 app.post("/api/notes", (req, res) => {
+  
   const { title, text } = req.body;
   if (title && text) {
     const newNote = {
@@ -55,7 +56,8 @@ app.post("/api/notes", (req, res) => {
       text,
       id: uuid(),
    };
-    readAndAppend(newNote, "./db/db.json");
+    append(newNote, "./db/db.json");
+    
     const response = {
      status: "Note Posted!",
      body: newNote,
