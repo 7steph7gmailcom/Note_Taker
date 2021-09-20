@@ -18,11 +18,11 @@ app.use(express.static("public"));
 // app.use(routes);
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "/public/index.html"));
+  res.sendFile(path.join(__dirname, "public/api/index.html"));
 });
-  
+
 app.get("/notes", (req, res) => {
-  res.sendFile(path.join(__dirname, "/public/notes.html"))
+  res.sendFile(path.join(__dirname, "public/api/notes.html"))
 });
 
 app.get("/api/notes", (req, res) => {
@@ -42,7 +42,7 @@ const append = (content, file) => {
         } else {
           const note = JSON.parse(data);
           note.push(content);
-          writeToFile(file, parsedData);
+          writeToFile(file, note);
         }
       });
     };
